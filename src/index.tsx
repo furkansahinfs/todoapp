@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./store";
 import { Router } from "./pages";
+import { loadThemeToRedux } from "./helpers";
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -22,3 +23,4 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+loadThemeToRedux();

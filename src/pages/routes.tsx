@@ -1,12 +1,11 @@
 import React, { FunctionComponent } from "react";
 import { Routes, Route } from "react-router-dom";
-
 import { LoginPage } from "./auth";
-import App from "../App";
+import { Todo } from "./todo";
 
 const Router: FunctionComponent = () => (
 	<Routes>
-		<Route path="/" element={<App />} />
+		<Route path="/" element={<Todo />} />
 		<Route path="/auth/login" element={<LoginPage />} />
 	</Routes>
 );

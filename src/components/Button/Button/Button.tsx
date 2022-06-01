@@ -13,7 +13,7 @@ const CustomButton = ({ onPressFunction, text, mode }: ButtonProps) => {
 	const { dark } = useTheme();
 	return (
 		<Button
-			className="button"
+			className="button my-2"
 			color={dark ? "secondary" : "primary"}
 			variant={mode}
 			onClick={onPressFunction}

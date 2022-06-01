@@ -63,3 +63,19 @@ export interface SignupProps {
 	phone?: string;
 	surname?: string;
 }
+
+export interface ICreateTodo {
+	date: string;
+	description: string;
+	priority: number;
+	title: string;
+}
+
+export interface ITodo {
+	date: string;
+	description: string;
+	id: number;
+	isCompleted: boolean;
+	priority: number;
+	title: string;
+}

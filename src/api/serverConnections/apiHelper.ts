@@ -57,9 +57,9 @@ export default class ApiHelper {
 			});
 	};
 
-	DELETE = (path: string, data: any) => {
+	DELETE = (path: string, config?: any) => {
 		return this.api
-			.delete(path, data)
+			.delete(path, config)
 			.then((response: any) => {
 				return ApiHelper.controlResponse(response);
 			})
@@ -114,7 +114,7 @@ export default class ApiHelper {
 	};
 
 	static controlResponse = async (response: any) => {
-		if (response.status === 200) {
+		if (response.status >= 200 && response.status <= 206) {
 			return {
 				data: response.data,
 				success: true,

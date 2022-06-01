@@ -24,11 +24,11 @@ const MyDefaultTheme = {
 const MyDarkTheme = {
 	dark: true,
 	colors: {
-		background: "#000000",
+		background: "#121212",
 		background2: "#000000",
 		border: "#ffffff",
 		button: "#3454fc",
-		card: "#0a0a0a",
+		card: "#1E1E1E",
 		notification: "#ff453a",
 		primary: "#0a84ff",
 		secondary: "#242424",

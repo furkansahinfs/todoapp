@@ -5,19 +5,19 @@ import "./Icon.scss";
 
 interface IconProps {
 	onPressFunction: () => void;
-	name: string;
+	icon: React.ElementType;
 }
 
-const CustomIcon = ({ onPressFunction, name }: IconProps) => {
+const CustomIcon = ({ onPressFunction, icon }: IconProps) => {
 	const { dark } = useTheme();
 	return (
 		<Icon
 			onClick={onPressFunction}
-			className="button icon-size"
+			className="icon icon-size"
 			color={dark ? "secondary" : "primary"}
-		>
-			{name}
-		</Icon>
+			component={icon}
+			fontSize="large"
+		/>
 	);
 };
 
