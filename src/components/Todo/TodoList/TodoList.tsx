@@ -60,6 +60,8 @@ const TodoList: React.FunctionComponent = () => {
 				<Icon icon={Add} onPressFunction={() => setOpenCreateTodoView(true)} />
 			</div>
 
+			<Sort filter={filter} setFilter={setFilter} />
+
 			<Dialog
 				open={openCreateTodoView}
 				onClose={() => setOpenCreateTodoView(false)}
@@ -74,12 +76,10 @@ const TodoList: React.FunctionComponent = () => {
 				</DialogContent>
 			</Dialog>
 
-			<Sort filter={filter} setFilter={setFilter} />
-
-			<List init={() => init()} todoList={todoList} />
+			<List init={() => init()} todoList={todoList} setTodoList={setTodoList} />
 
 			<TablePagination
-				count={100}
+				count={20}
 				page={page - 1}
 				onPageChange={(event: any, newPage: number) => setPage(newPage + 1)}
 				rowsPerPage={rowsPerPage}

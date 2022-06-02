@@ -7,9 +7,9 @@ import {
 	Select,
 	SelectChangeEvent,
 } from "@mui/material";
-import "./Sort.scss";
 import { IFilter } from "../TodoList";
 import { useTheme } from "../../../../theme";
+import "./Sort.scss";
 
 interface ISort {
 	filter: IFilter;
@@ -44,7 +44,12 @@ const Sort: React.FunctionComponent<ISort> = ({ filter, setFilter }) => {
 		<div className="sort row">
 			<Box className="col-md-3 my-1">
 				<FormControl fullWidth>
-					<InputLabel id="sort-option-select-label">Sort Option</InputLabel>
+					<InputLabel
+						id="sort-option-select-label"
+						style={{ color: colors.text }}
+					>
+						Sort Option
+					</InputLabel>
 					<Select
 						labelId="sort-option-select-label"
 						id="sort-option-select"
@@ -63,7 +68,12 @@ const Sort: React.FunctionComponent<ISort> = ({ filter, setFilter }) => {
 			</Box>
 			<Box className="col-md-3 my-1">
 				<FormControl fullWidth>
-					<InputLabel id="sort-value-select-label">Sort Value</InputLabel>
+					<InputLabel
+						id="sort-value-select-label"
+						style={{ color: colors.text }}
+					>
+						Sort Value
+					</InputLabel>
 					<Select
 						labelId="sort-value-select-label"
 						id="sort-value-select"
