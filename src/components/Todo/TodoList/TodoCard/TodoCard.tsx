@@ -1,13 +1,12 @@
 import React from "react";
 import { alpha, ListItem, ListItemText } from "@mui/material";
-import "./TodoCard.scss";
 import { CheckCircleOutline, DeleteForever } from "@mui/icons-material";
-import { useDrag } from "react-dnd";
 import { useTheme } from "../../../../theme";
 import { ITodo } from "../../../../interfaces/interfaces";
 import { priorities } from "../../Priority/Priority.helper";
 import { Icon } from "../../../Icon";
 import { checkTodo, deleteTodo } from "./TodoCard.helper";
+import "./TodoCard.scss";
 
 export interface ITodoCard {
 	item: ITodo;
@@ -15,28 +14,19 @@ export interface ITodoCard {
 }
 
 const TodoCard: React.FunctionComponent<ITodoCard> = ({ item, refreshOn }) => {
-	const [{ isDragging }, drag] = useDrag({
-		item,
-		type: "LISTITEM",
-		collect: (monitor) => ({
-			isDragging: monitor.isDragging(),
-		}),
-	});
-	const opacity = isDragging ? 0.4 : 1;
-
 	const priorityItem = priorities.find(
 		(element) => element.id === item.priority,
 	);
 	const { colors } = useTheme();
 
 	const listItemArray = [
-		{ text: item.title },
-		{ text: item.description },
-		{ text: item.date },
+		{ text: item.title, class: "col-md-2" },
+		{ text: item.description, class: "col-md-5" },
+		{ text: item.date, class: "col-md-2" },
 	];
 
 	return (
-		<div ref={drag} className="movable-item" style={{ opacity }}>
+		<div className="movable-item">
 			<ListItem
 				className="flex-wrap row mx-auto border rounded my-1 bg-opacity-10"
 				style={{
@@ -46,11 +36,15 @@ const TodoCard: React.FunctionComponent<ITodoCard> = ({ item, refreshOn }) => {
 						: "transparent",
 				}}
 			>
-				{listItemArray.map((listItem) => (
+				{listItemArray.map((listItem, index) => (
 					<ListItemText
-						className="text-start col-md-3"
+						key={index}
+						className={`text-start ${listItem.class}`}
 						style={{ color: colors.text, flex: "auto" }}
 						primary={listItem.text}
+						sx={{
+							overflowWrap: "anywhere",
+						}}
 					/>
 				))}
 				<ListItemText

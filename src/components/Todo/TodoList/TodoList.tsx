@@ -1,34 +1,59 @@
 import React, { useEffect, useState } from "react";
-import { Dialog, DialogContent, List } from "@mui/material";
-import { Add, AddTask, PlusOne } from "@mui/icons-material";
-import "./TodoList.scss";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import { Dialog, DialogContent, List, TablePagination } from "@mui/material";
+import { Add } from "@mui/icons-material";
 import { ITodo } from "../../../interfaces/interfaces";
 import { CreateTodoCard } from "../CreateTodoCard";
 import { useTheme } from "../../../theme";
 import { Icon } from "../../Icon";
 import { GetTodoListRequest } from "../../../api";
 import { TodoCard } from "./TodoCard";
+import { Sort } from "./Sort";
+import "./TodoList.scss";
+
+export interface IFilter {
+	searchBy: string;
+	sortBy: string;
+	order: string;
+}
 
 const TodoList: React.FunctionComponent = () => {
 	const [todoList, setTodoList] = useState<Array<ITodo>>([]);
 	const [openCreateTodoView, setOpenCreateTodoView] = useState(false);
+	const [filter, setFilter] = useState<IFilter>({
+		searchBy: "",
+		sortBy: "priority",
+		order: "desc",
+	});
+	const [page, setPage] = useState<number>(1);
+	const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+	const { colors } = useTheme();
 
 	useEffect(() => {
 		(async () => {
 			await init();
 		})();
-	}, []);
-
-	const { colors } = useTheme();
+	}, [page, rowsPerPage, filter]);
 
 	async function init() {
-		const todos = await GetTodoListRequest();
+		const todos = await GetTodoListRequest(
+			page,
+			rowsPerPage,
+			filter.searchBy,
+			filter.sortBy,
+			filter.order,
+		);
+
 		if (todos instanceof Array) {
 			setTodoList(todos);
 		}
 	}
+	const handleChangeRowsPerPage = (
+		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+	) => {
+		setRowsPerPage(parseInt(event.target.value, 10));
+		setPage(1);
+	};
+
 	return (
 		<div className="row">
 			<div className="d-flex justify-content-end">
@@ -48,13 +73,23 @@ const TodoList: React.FunctionComponent = () => {
 					/>
 				</DialogContent>
 			</Dialog>
-			<DndProvider backend={HTML5Backend}>
-				<List>
-					{todoList.map((item: ITodo) => (
-						<TodoCard key={item.title} item={item} refreshOn={() => init()} />
-					))}
-				</List>
-			</DndProvider>
+
+			<Sort filter={filter} setFilter={setFilter} />
+
+			<List>
+				{todoList.map((item: ITodo, index: number) => (
+					<TodoCard key={index} item={item} refreshOn={() => init()} />
+				))}
+			</List>
+
+			<TablePagination
+				count={100}
+				page={page - 1}
+				onPageChange={(event: any, newPage: number) => setPage(newPage + 1)}
+				rowsPerPage={rowsPerPage}
+				onRowsPerPageChange={handleChangeRowsPerPage}
+				style={{ color: colors.text }}
+			/>
 		</div>
 	);
 };

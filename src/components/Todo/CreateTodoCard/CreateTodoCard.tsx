@@ -6,7 +6,7 @@ import { Button } from "../../Button";
 import PriorityView from "../Priority/PriorityView/PriorityView";
 import { useTheme } from "../../../theme";
 import { CreateTodoRequest } from "../../../api";
-import { ICreateTodo, ITodo } from "../../../interfaces/interfaces";
+import { ICreateTodo } from "../../../interfaces/interfaces";
 
 interface ICreateTodoCard {
 	refreshOnCreate: () => void;
@@ -35,6 +35,8 @@ const CreateTodoCard: React.FunctionComponent<ICreateTodoCard> = ({
 				alert(result);
 			}
 			setOpenCreateTodoView(false);
+		} else {
+			alert("Please fill in the blanks");
 		}
 	};
 

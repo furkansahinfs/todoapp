@@ -13,7 +13,6 @@ export interface PriorityItemProps {
 export interface IPriorityItem {
 	item: PriorityItemProps;
 	priorityChoice: number;
-	// eslint-disable-next-line no-unused-vars
 	handleChangeCheckbox: (event: any, item: PriorityItemProps) => void;
 }
 

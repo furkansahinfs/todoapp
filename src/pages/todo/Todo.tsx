@@ -11,7 +11,7 @@ const Todo: React.FunctionComponent = () => {
 	const { colors } = useTheme();
 	return (
 		<div
-			className="container-fluid vh-100 h-100"
+			className="container-fluid min-vh-100"
 			style={{ backgroundColor: colors.background }}
 		>
 			<div className="position-fixed">
