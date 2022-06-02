@@ -79,7 +79,7 @@ const TodoList: React.FunctionComponent = () => {
 			<List init={() => init()} todoList={todoList} setTodoList={setTodoList} />
 
 			<TablePagination
-				count={20}
+				count={50}
 				page={page - 1}
 				onPageChange={(event: any, newPage: number) => setPage(newPage + 1)}
 				rowsPerPage={rowsPerPage}
