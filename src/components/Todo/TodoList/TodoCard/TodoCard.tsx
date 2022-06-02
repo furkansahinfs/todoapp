@@ -28,7 +28,7 @@ const TodoCard: React.FunctionComponent<ITodoCard> = ({ item, refreshOn }) => {
 	return (
 		<div className="movable-item">
 			<ListItem
-				className="flex-wrap row mx-auto border rounded my-1 bg-opacity-10"
+				className="flex-wrap row mx-auto border rounded my-1 bg-opacity-10 cursor"
 				style={{
 					textDecoration: item.isCompleted ? "line-through" : "",
 					backgroundColor: priorityItem?.color
@@ -48,7 +48,7 @@ const TodoCard: React.FunctionComponent<ITodoCard> = ({ item, refreshOn }) => {
 					/>
 				))}
 				<ListItemText
-					className="text-start col-md-1"
+					className="text-start col-md-1 priority"
 					style={{ color: priorityItem?.color }}
 					primary={priorityItem?.title}
 				/>
