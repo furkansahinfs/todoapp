@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Dialog, DialogContent, List, TablePagination } from "@mui/material";
+import { Dialog, DialogContent, TablePagination } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import { ITodo } from "../../../interfaces/interfaces";
 import { CreateTodoCard } from "../CreateTodoCard";
 import { useTheme } from "../../../theme";
 import { Icon } from "../../Icon";
 import { GetTodoListRequest } from "../../../api";
-import { TodoCard } from "./TodoCard";
 import { Sort } from "./Sort";
+import { List } from "./List";
 import "./TodoList.scss";
 
 export interface IFilter {
@@ -76,11 +76,7 @@ const TodoList: React.FunctionComponent = () => {
 
 			<Sort filter={filter} setFilter={setFilter} />
 
-			<List>
-				{todoList.map((item: ITodo, index: number) => (
-					<TodoCard key={index} item={item} refreshOn={() => init()} />
-				))}
-			</List>
+			<List init={() => init()} todoList={todoList} />
 
 			<TablePagination
 				count={100}
